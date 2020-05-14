@@ -29,44 +29,105 @@
         </div>
     </header>
 
-    <div class="blog-post">
-        <h2 class="blog-post-title">Find the Largest Product of Any 3 Numbers</h2>
-        <p class="blog-post-meta">May 12, 2020 by <a href="about.html">Andrew Doolittle</a></p>
 
-        <p>Scaling your application takes on a variety of design decisions.
-            You may want faster speeds, more throughput, or better security.
-            One way you can optimize your system is by implementing a reverse proxy server.</p>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
 
-        <img src="https://cdn-images-1.medium.com/max/800/1*vofb-bJAsVE_MB9-y_avTg.png" alt="Reverse proxy diagram">
-        <p>Reverse proxies balance loads by intercepting client requests, caching files, and distributing server calls</p>
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Find the Largest Product of Any Three Numbers</h2>
+                    <p class="blog-post-meta">May 12, 2020 by <a href="about.html">Andrew Doolittle</a></p>
 
-        <h3>HTTP Request Basics</h3>
-        <p>When a user visits a website, a number of things happen. First, they enter a URL like CodingWithAndrew.com.
-            Behind the scenes, the user's browser will find an IP address associated with that URL and make an HTTP request for the IP address' HTML page.
-            After receiving the HTML page, the browser will read the code inside the HTML page. </p>
+                    <h4>Write a function that finds the largest possible product of any three numbers. The three numbers may be negative</h4>
 
-        <p>Most likely, there are additional links and scripts needed,
-            like retrieving the Bootstrap CDN, a CSS file, or running the JavaScript.
-            That JavaScript code will make another request to the main server.
-            Then, depending on what is needed in that request, a photo, a redirect to a product page, or a confirmation of a payment,
-            the main server will make a request to another server dedicated to specific tasks.
+                    <p>Let's lay out the important details.</p>
+                    <p>Input: An array of integers.</p>
+                    <p>Output: largest product of the three integers.</p>
+                    <p>Edge cases: Negative numbers, an array length of less than 3.</p>
 
-        <p>A photo request leads to the database server hosting photos;
-            a product page request leads to the database server hosting information on products;
-            a payment confirmation request leads to another server
-            handling payment process logic.</p>
+                    <p>Now let's create a few examples to help us visualize some patterns.</p>
 
-        <h3>Need For Scaling</h3>
-        <p>
-            Each request may jump around two or more servers. While it doesn't seem like much,
-            Internet traffic for a global shopping website like Amazon with millions of users and millions of products
-            means merely visiting the Amazon home page already contributes to billions of requests and that slows things down.
-        </p>
-        <p>
-            So rather than a request jumping around multiple servers, a well configured reverse proxy will determine
-            which requests are the most popular, save information from the databases, intercept those calls, and directly return the requests.
-        </p>
-    </div><!-- /.blog-post -->
+                    <h5>Example 1</h5>
+                    <p>Input: <code>[1,5,8,3]</code></p>
+                    <p>In this example, we know that getting the product using the highest numbers will return the correct output.
+                        There’s no point of using 1 because we know any number multiplied by 1 returns itself.
+                    </p>
+                    <p><samp>9 * 5 * 3 = 135</samp></p>
+
+                    <h5>Example 2</h5>
+                    <p>Input: <code>[100, 91, -3, 40]</code></p>
+                    <p>Similar to the first example, we don’t want to multiply by a negative as that results in a negative number.
+                    </p>
+                    <p><samp>100 * 91 * 40 = 364000</samp></p>
+
+                    <h5>Example 3</h5>
+                    <p>Input: <code>[-4, -10, 2, 3, 1]</code></p>
+                    <p>This one is tricky because we finally have a situation where there are two negative numbers
+                        and we know two negative numbers return a positive. One or three cases of negative numbers will return a negative product.
+                        This means we either use two negatives or none at all.
+                        Let’s test some combinations to find the largest product.
+                    </p>
+
+                    <p><samp>3 * 2 * -4 = -24</samp></p>
+                    <p><samp>3 * 2 * -10 = -60</samp></p>
+                    <p><samp>3 * 2 * 1 = 6</samp></p>
+                    <p><samp>-10 * - 4 * 2 = 80</samp></p>
+                    <p><samp>-10 * -4 * 3 = 120</samp></p>
+
+                    <h5>Example 4</h5>
+                    <p>Input: <code>[-9, 3, 7, -2, 10, -11]</code></p>
+                    <p>After these four examples, we can see a pattern in how to find the highest product.
+                        First, we have to sort our array in a descending order. We then find the product of the first three elements.</p>
+
+                    <p>However, because there’s a chance for a negative numbers to be present, we should also compare
+                        the product of the last two numbers and only two because we need two negatives to return a positive.
+                        Then we multiply the last two elements with the first element.
+                        Once we have two products, we can compare whichever is higher and return that.
+                    </p>
+
+                    <p><samp>10 * 7 * 3 = 210</samp></p>
+                    <p><samp>-11 * -9 * 10 = 990</samp></p>
+
+                    <h5>Solution in JavaScript</h5>
+                     <pre>
+                         <code>
+                             var largestProductOfThree = function(array) {
+                            // TODO: everything
+                            //ensure input is array
+                            if (!Array.isArray(array)) {
+                            return null;
+                            }
+                            //ensure array is proper length
+                            if (array.length < 3) {
+                            return null;
+                            }
+
+                            //create  sorted copy to not mutate
+                            let sortedAscend = array.slice().sort(function(a,b) {return a - b})
+
+                            //get length
+                            let len = sortedAscend.length;
+
+                            //track using 2 products variables
+                            //A product of last 3 (highest positive numbers)
+                            let productA = sortedAscend[len-1] * sortedAscend[len-2] * sortedAscend[len-3];
+                            //B product of first 2 lowest and last highest (neg * neg * pos = pos)
+                            let productB = sortedAscend[0] * sortedAscend[1] * sortedAscend[len-1];
+
+                            return Math.max(productA, productB);
+
+                            };
+                         </code>
+                     </pre>
+
+                </div><!-- /.blog-post -->
+
+            </div><!-- /.blog-main -->
+
+
+        </div><!-- /.row -->
+
+    </main>
 
 </div>
 

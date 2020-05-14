@@ -29,44 +29,53 @@
         </div>
     </header>
 
-    <div class="blog-post">
-        <h2 class="blog-post-title">Scaling Your Application via Reverse Proxy</h2>
-        <p class="blog-post-meta">May 14, 2020 by <a href="about.html">Andrew Doolittle</a></p>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Scaling Your Application via Reverse Proxy</h2>
+                    <p class="blog-post-meta">May 14, 2020 by <a href="about.html">Andrew Doolittle</a></p>
 
-        <p>Scaling your application takes on a variety of design decisions.
-            You may want faster speeds, more throughput, or better security.
-            One way you can optimize your system is by implementing a reverse proxy server.</p>
+                    <p>Scaling your application takes on a variety of design decisions.
+                        You may want faster speeds, more throughput, or better security.
+                        One way you can optimize your system is by implementing a reverse proxy server.</p>
 
-        <img src="https://cdn-images-1.medium.com/max/800/1*vofb-bJAsVE_MB9-y_avTg.png" alt="Reverse proxy diagram">
-        <p>Reverse proxies balance loads by intercepting client requests, caching files, and distributing server calls</p>
+                    <img src="https://cdn-images-1.medium.com/max/800/1*vofb-bJAsVE_MB9-y_avTg.png" alt="Reverse proxy diagram">
+                    <p>Reverse proxies balance loads by intercepting client requests, caching files, and distributing server calls</p>
 
-        <h3>HTTP Request Basics</h3>
-        <p>When a user visits a website, a number of things happen. First, they enter a URL like CodingWithAndrew.com.
-            Behind the scenes, the user's browser will find an IP address associated with that URL and make an HTTP request for the IP address' HTML page.
-            After receiving the HTML page, the browser will read the code inside the HTML page. </p>
+                    <h3>HTTP Request Basics</h3>
+                    <p>When a user visits a website, a number of things happen. First, they enter a URL like CodingWithAndrew.com.
+                        Behind the scenes, the user's browser will find an IP address associated with that URL and make an HTTP request for the IP address' HTML page.
+                        After receiving the HTML page, the browser will read the code inside the HTML page. </p>
 
-        <p>Most likely, there are additional links and scripts needed,
-            like retrieving the Bootstrap CDN, a CSS file, or running the JavaScript.
-            That JavaScript code will make another request to the main server.
-            Then, depending on what is needed in that request, a photo, a redirect to a product page, or a confirmation of a payment,
-            the main server will make a request to another server dedicated to specific tasks.
+                    <p>Most likely, there are additional links and scripts needed,
+                        like retrieving the Bootstrap CDN, a CSS file, or running the JavaScript.
+                        That JavaScript code will make another request to the main server.
+                        Then, depending on what is needed in that request, a photo, a redirect to a product page, or a confirmation of a payment,
+                        the main server will make a request to another server dedicated to specific tasks.
 
-        <p>A photo request leads to the database server hosting photos;
-            a product page request leads to the database server hosting information on products;
-        a payment confirmation request leads to another server
-            handling payment process logic.</p>
+                    <p>A photo request leads to the database server hosting photos;
+                        a product page request leads to the database server hosting information on products;
+                    a payment confirmation request leads to another server
+                        handling payment process logic.</p>
 
-        <h3>Need For Scaling</h3>
-        <p>
-            Each request may jump around two or more servers. While it doesn't seem like much,
-            Internet traffic for a global shopping website like Amazon with millions of users and millions of products
-            means merely visiting the Amazon home page already contributes to billions of requests and that slows things down.
-        </p>
-        <p>
-            So rather than a request jumping around multiple servers, a well configured reverse proxy will determine
-            which requests are the most popular, save information from the databases, intercept those calls, and directly return the requests.
-        </p>
-    </div><!-- /.blog-post -->
+                    <h3>Need For Scaling</h3>
+                    <p>
+                        Each request may jump around two or more servers. While it doesn't seem like much,
+                        Internet traffic for a global shopping website like Amazon with millions of users and millions of products
+                        means merely visiting the Amazon home page already contributes to billions of requests and that slows things down.
+                    </p>
+                    <p>
+                        So rather than a request jumping around multiple servers, a well configured reverse proxy will determine
+                        which requests are the most popular, save information from the databases, intercept those calls, and directly return the requests.
+                    </p>
+                </div><!-- /.blog-post -->
+            </div><!-- /.blog-main -->
+
+
+        </div><!-- /.row -->
+
+    </main>
 
 </div>
 
