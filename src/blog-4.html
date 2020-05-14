@@ -35,26 +35,69 @@
             <div class="col-md-8 blog-main">
 
                 <div class="blog-post">
-                    <h2 class="blog-post-title">(Nearly) Everything in Java is an Object</h2>
+                    <h2 class="blog-post-title">Classes in Java</h2>
                     <p class="blog-post-meta">May 4, 2020 by <a href="about.html">Andrew Doolittle</a></p>
 
-                    <p>According to Wikipedia:</p>
-                    <blockquote class="blockquote text-center">
-                        <p class="mb-0">An object can be a variable, a data structure, a function, or a method,
-                            and as such, is a value in memory referenced by an identifier.</p>
-                    </blockquote>
+                    <p>Building off the idea that nearly everything in Java is an object, we can begin to understand classes.</p>
 
-                    <p>By assigning objects as a value in memory, developers are able to
-                        design modular and reusable software systems. Not reusing code is inefficient as
-                        the system would need to create separate reservations in memory for similar or identical things.</p>
+                    <p>Just like in real life where many things share the same material or genetic makeup, so too can objects in Java.
+                    Where a golden retriever is a dog, which is a type of canine, coming from mammals in the larger sphere of animals.
+                    Each of these has a parent to child relationship as they are not completely unrelated.</p>
 
-                    <p>Imagine we're drawing a simple picture of a picnic at the beach using crayons.
-                        To color the sun, we use yellow. To color the sand, we use light brown.
-                        To color the water, we use blue. </p>
+                    <p>Let's take a look at the following code examples to understand how classes are created in Java.</p>
 
-                    <p>However, our box has 5 blue crayons of exactly the same shade.
-                        Which one do we use? To a child, they're all the same, but to a computer,
-                        they are 5 separate unrelated objects.</p>
+                    <pre>public class Animal {
+   public Animal() {
+      System.out.println("A new animal has been created!");
+   }
+   public String sleep() {
+      return "An animal sleeps...";
+   }
+   public String eat() {
+      return "An animal eats...";
+   }
+}
+
+public class Bird extends Animal {
+    public Bird() {
+        //super();
+        System.out.println("A bird is hatched...");
+    }
+
+    @Override
+    public String sleep() {
+        return "A bird sleeps soundly...";
+    }
+
+    @Override
+    public String eat() {
+        return "A bird eats...";
+    }
+
+
+    public String fly() {
+        //Birds can fly but other animals can't so this method
+        //is unique to the Bird class
+        return "A bird flies...";
+    }
+}
+
+public class AnimalApp {
+
+    public static void main(String[] args) {
+
+        Animal a = new Animal(); // "A new animal has been created!"
+        print(a.eat()); // "An animal eats..."
+        print(a.sleep()); // "An animal sleeps..."
+
+        Bird b = new Bird();
+        print(b.eat()); // "A bird eats..."
+        print(b.sleep()); // "A bird sleeps soundly..."
+        print(b.fly()); // "A bird flies..."
+
+    }
+}
+                    </pre>
                 </div><!-- /.blog-post -->
 
             </div><!-- /.blog-main -->
