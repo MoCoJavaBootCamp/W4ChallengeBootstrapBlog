@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <title>Coding With Andrew</title>
+</head>
+<body class="bg-light">
+
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="text-muted" href="about.html">About</a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="index.html">Coding With Andrew</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="text-muted" href="#">Java Bootcamp</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="blog-post">
+        <h2 class="blog-post-title">Scaling Your Application via Reverse Proxy</h2>
+        <p class="blog-post-meta">May 14, 2020 by <a href="about.html">Andrew Doolittle</a></p>
+
+        <p>Scaling your application takes on a variety of design decisions.
+            You may want faster speeds, more throughput, or better security.
+            One way you can optimize your system is by implementing a reverse proxy server.</p>
+
+        <img src="https://cdn-images-1.medium.com/max/800/1*vofb-bJAsVE_MB9-y_avTg.png" alt="Reverse proxy diagram">
+        <p>Reverse proxies balance loads by intercepting client requests, caching files, and distributing server calls</p>
+
+        <h3>HTTP Request Basics</h3>
+        <p>When a user visits a website, a number of things happen. First, they enter a URL like CodingWithAndrew.com.
+            Behind the scenes, the user's browser will find an IP address associated with that URL and make an HTTP request for the IP address' HTML page.
+            After receiving the HTML page, the browser will read the code inside the HTML page. </p>
+
+        <p>Most likely, there are additional links and scripts needed,
+            like retrieving the Bootstrap CDN, a CSS file, or running the JavaScript.
+            That JavaScript code will make another request to the main server.
+            Then, depending on what is needed in that request, a photo, a redirect to a product page, or a confirmation of a payment,
+            the main server will make a request to another server dedicated to specific tasks.
+
+        <p>A photo request leads to the database server hosting photos;
+            a product page request leads to the database server hosting information on products;
+        a payment confirmation request leads to another server
+            handling payment process logic.</p>
+
+        <h3>Need For Scaling</h3>
+        <p>
+            Each request may jump around two or more servers. While it doesn't seem like much,
+            Internet traffic for a global shopping website like Amazon with millions of users and millions of products
+            means merely visiting the Amazon home page already contributes to billions of requests and that slows things down.
+        </p>
+        <p>
+            So rather than a request jumping around multiple servers, a well configured reverse proxy will determine
+            which requests are the most popular, save information from the databases, intercept those calls, and directly return the requests.
+        </p>
+    </div><!-- /.blog-post -->
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
