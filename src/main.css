@@ -20,7 +20,13 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
+.mb-0 {
+    font-family: 'Operator Mono', sans-serif;
+}
+
 .display-4 {
+    font-family: 'Operator Mono', sans-serif;
+
     font-size: 2.5rem;
 }
 @media (min-width: 768px) {
@@ -105,4 +111,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blog-footer p:last-child {
     margin-bottom: 0;
+}
+
+.blog-post-title {
+    font-family: 'Operator Mono', sans-serif;
 }
